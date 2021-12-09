@@ -1,11 +1,35 @@
 h1 {
   font-family: "Arial";
+  background-color: orange;
+}
+
+body {
+  background-color: #AEFAF7
 }
 
 .containerSide {
   display: flex;
+  color: white;
+  font-size: 40px;
+  border-radius: 30px;
 }
 
 .containerSide > div {
-  flex: 0.1;
+  flex: 1;
+}
+
+div2 {
+  width: 500px;
+  height: 500px;
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+
+div2 {
+  background-image: url("https://c.tenor.com/6MsukwHKJ58AAAAC/ara-anime.gif");
+}
+
+gif {
+  border-radius: 30px;
+  border-width: 5px;
 }
