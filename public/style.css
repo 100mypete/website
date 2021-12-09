@@ -1,0 +1,11 @@
+h1 {
+  font-family: "Arial";
+}
+
+.containerSide {
+  display: flex;
+}
+
+.containerSide > div {
+  flex: 0.1;
+}
