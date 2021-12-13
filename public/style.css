@@ -34,14 +34,9 @@ gif {
   border-width: 5px;
 }
 
-.simonLayout {
-  display: inline;
-  color: white;
-
-}
-
 .simon {
-  margin: 0 auto;
+  display: inline;
+  margin: 0;
   background-color: white;
   min-width: 100px;
   max-width: 100px;
@@ -51,22 +46,34 @@ gif {
   background-color: rgb(255,0,0);
   width: 100px;
   height: 100px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: rgb(168,7,2);
 }
 
 .green {
   background-color: rgb(43, 219, 15);
   width: 100px;
   height: 100px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: rgb(71,168,2);
 }
 
 .blue {
   background-color: rgb(44, 91, 245);
   width: 100px;
   height: 100px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: rgb(0,56,153);
 }
 
 .yellow {
   background-color: rgb(208, 255, 0);
   width: 100px;
   height: 100px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: rgb(193,196,0);
 }
