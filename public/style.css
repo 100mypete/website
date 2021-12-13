@@ -1,5 +1,5 @@
 h1 {
-  font-family: "Arial";
+  font-family: "Messina", sans-serif;
   background-color: orange;
 }
 
@@ -32,4 +32,41 @@ div2 {
 gif {
   border-radius: 30px;
   border-width: 5px;
+}
+
+.simonLayout {
+  display: inline;
+  color: white;
+
+}
+
+.simon {
+  margin: 0 auto;
+  background-color: white;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.red {
+  background-color: rgb(255,0,0);
+  width: 100px;
+  height: 100px;
+}
+
+.green {
+  background-color: rgb(43, 219, 15);
+  width: 100px;
+  height: 100px;
+}
+
+.blue {
+  background-color: rgb(44, 91, 245);
+  width: 100px;
+  height: 100px;
+}
+
+.yellow {
+  background-color: rgb(208, 255, 0);
+  width: 100px;
+  height: 100px;
 }
