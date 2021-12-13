@@ -3,6 +3,12 @@ h1 {
   background-color: orange;
 }
 
+h2 {
+  font-family: "Messina", sans-serif;
+  font-size: 30;
+  text-align: center;
+}
+
 body {
   background-color: #AEFAF7
 }
@@ -34,10 +40,14 @@ gif {
   border-width: 5px;
 }
 
+.simonBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .simon {
   display: inline;
-  margin: 0;
-  background-color: white;
   min-width: 100px;
   max-width: 100px;
 }
