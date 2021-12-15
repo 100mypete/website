@@ -79,22 +79,6 @@ gif {
   border-color: rgb(193,196,0);
 }
 
-.glowRed {
-  box-shadow: 0 0 50px rgb(252,98,98);
-  background-color: rgb(252,78,78);
-}
-
-.glowGreen {
-  box-shadow: 0 0 50px rgb(117,255,79);
-  background-color: rgb(183,255,164);
-}
-
-.glowBlue {
-  box-shadow: 0 0 50px rgb(150,192,255);
-  background-color: rgb(194,218,255);
-}
-
-.glowYellow {
-  box-shadow: 0 0 50px rgb(251,255,194);
-  background-color: rgb(251,252,225);
+#playButton:hover {
+  cursor: pointer;
 }
