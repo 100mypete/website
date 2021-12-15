@@ -47,6 +47,12 @@ gif {
   border-width: 3px;
 }
 
+h3 {
+  font-family: "Messina", sans-serif;
+  font-size: 18;
+  text-align: center;
+}
+
 .simonBox {
   display: flex;
   justify-content: center;
@@ -77,6 +83,22 @@ gif {
 .yellow {
   background-color: rgb(208, 255, 0);
   border-color: rgb(193,196,0);
+}
+
+.redBlink {
+  background-color: rgb(250,110,115);
+}
+
+.greenBlink {
+  background-color: rgb(161,255,138);
+}
+
+.blueBlink {
+  background-color: rgb(138,192,255);
+}
+
+.yellowBlink {
+  background-color: rgb(246,255,179);
 }
 
 #playButton:hover {

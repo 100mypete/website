@@ -63,6 +63,10 @@
         THE SIMON GAME
       </h2>
 
+      <h3 id="score">
+        ROUND:
+      </h3>
+
       <div class="simonBox">
         <div>
           <div class="simon">
@@ -97,152 +101,166 @@
 
         var compSequence = [];
         var userSequence = [];
-        var rounds = 0;
+        var round = 0;
+        var moves = 1;
+        var indexToCheck;
 
-        function addColor(arr) {
-          var colors = ["red","green","blue","yellow"];
-          return arr.push(colors[Math.floor(Math.random() * colors.length)]);
-        };
+        function disableAll() {
+          document.getElementById("redButton").disabled = true;
+          document.getElementById("greenButton").disabled = true;
+          document.getElementById("blueButton").disabled = true;
+          document.getElementById("yellowButton").disabled = true;
+        }
 
-        function blink() {
-          var i = 0;
+        function enableAll() {
+          document.getElementById("redButton").disabled = false;
+          document.getElementById("greenButton").disabled = false;
+          document.getElementById("blueButton").disabled = false;
+          document.getElementById("yellowButton").disabled = false;
+        }
 
-          var interval = setInterval(function() {
-            $("" + compSequence[i]).fadeTo("slow", 0).fadeTo("slow",1);
-            i++
-            if (i >= arr.length) {
-              clearInterval(interval);
-            }
-          }, 1500);
-        };
+        function reload() {
+          location.reload();
+        }
 
-        function resetUser() {
-          userSequence = [];
-        };
+        function check() {
+          if (userSequence[-1] == compSequence[indexToCheck]) {
+            indexToCheck++;
+            checkEnd();
+          } else {
+            document.getElementById("playButton").innerHTML = "Restart";
+            document.getElementById("playButton").disabled = false;
+            document.getElementById("playButton").addEventListener("click",reload);
+            setTimeout(function() {
+              alert("You survived " + round + " rounds.")
+            },10);
+          }
+        }
 
-        function nextRound() {
-          rounds++;
-        };
+        function checkEnd() {
+          if (userSequence.length == compSequence.length) {
+            round++;
+            document.getElementById("score").innerHTML = ("ROUND: " + round);
+            moves++;
+            compSequence = userSequence;
+            userSequence = [];
+            indexToCheck = 0;
+            start();
+          }
+        }
 
-        function resetGame() {
-          rounds = 0;
-          compSequence = [];
-          resetUser();
-        };
-
-        function playerTurn() {
-          nextRound();
-          addColor(compSequence);
-          blink(compSequence);
-
-          $(".button").off("click").on("click", function() {
-            userSequence.push($(this).attr("id"));
-
-            if (JSON.stringify(compSequence) === JSON.stringify(userSequence)) {
-              resetUser;
-              playerTurn();
+        function blink(color) {
+          var redSquare = document.getElementById("redButton");
+          var greenSquare = document.getElementById("greenButton");
+          var blueSquare = document.getElementById("blueButton");
+          var yellowSquare = document.getElementById("yellowButton");
+          switch (color) {
+            case 0:
+              var list = redSquare.classList;
+              list.remove("red");
+              list.add("redBlink");
+              setTimeout(function() {
+                list.remove("redBlink");
+                list.add("red");
+              },1000);
               break;
-            }
-
-            if (answers[i] !== compSequence[i]) {
-              alert("GAME OVER");
-              resetGame;
+            case 1:
+              var list = greenSquare.classList;
+              list.remove("green");
+              list.add("greenBlink");
+              setTimeout(function() {
+                list.remove("greenBlink");
+                list.add("green");
+              },1000);
               break;
-            }
-          });
-        };
+            case 2:
+              var list = blueSquare.classList;
+              list.remove("blue");
+              list.add("blueBlink");
+              setTimeout(function() {
+                list.remove("blueBlink");
+                list.add("blue");
+              },1000);
+              break;
+            case 3:
+              var list = yellowSquare.classList;
+              list.remove("yellow");
+              list.add("yellowBlink");
+              setTimeout(function() {
+                list.remove("yellowBlink");
+                list.add("yellow");
+              },1000);
+              break;
+          }
+        }
 
-        $("#playButton").click(function() {
-          playerTurn();
-        });
+        function randomColor() {
+          return Math.floor(Math.random() * 4);
+        }
 
-        // $("#playButton").click(function() {
-        //   nextSequence();
-        // });
-        //
-        // function nextSequence() {
-        //   var randomNumber = Math.floor(Math.random()*4);
-        //   compSequence.push(randomNumber);
-        //   showSequence(compSequence[compSequence.length - 1]);
-        //   userSequence = [];
-        // };
-        //
-        // function showSequence(thing) {
-        //
-        //   switch (thing) {
-        //     case 0:
-        //       $("#redButton").addClass("glowRed");
-        //       setTimeout(function() {
-        //         $("#redButton").removeClass("glowRed");
-        //       },250);
-        //       break;
-        //     case 1:
-        //       $("#greenButton").addClass("glowGreen");
-        //       setTimeout(function() {
-        //         $("#greenButton").removeClass("glowGreen");
-        //       },250);
-        //       break;
-        //     case 2:
-        //       $("#blueButton").addClass("glowBlue");
-        //       setTimeout(function() {
-        //         $("#blueButton").removeClass("glowBlue");
-        //       },250);
-        //       break;
-        //     case 3:
-        //       $("#yellowButton").addClass("glowYellow");
-        //       setTimeout(function() {
-        //         $("#yellowButton").removeClass("glowYellow");
-        //       },250);
-        //       break;
-        //   }
-        //
-        // };
-        //
-        // $(".button").click(function() {
-        //   var clicked = $(this).attr("id");
-        //   switch(clicked) {
-        //     case "redButton":
-        //       userSequence.push(0);
-        //       showSequence(0);
-        //       break;
-        //     case "greenButton":
-        //       userSequence.push(1);
-        //       showSequence(1);
-        //       break;
-        //     case "blueButton":
-        //       userSequence.push(2);
-        //       showSequence(2);
-        //       break;
-        //     case "yellowButton":
-        //       userSequence.push(3);
-        //       showSequence(3);
-        //       break;
-        //   }
-        //
-        //   checkSequence(userSequence.length - 1);
-        //
-        // });
-        //
-        // function checkSequence(index) {
-        //   if (userSequence[index] === compSequence[index] && compSequence.length === userSequence.length) {
-        //     setTimeout(function() {
-        //       nextSequence();
-        //     },1000);
-        //   }
-        //   else {
-        //     gameOver();
-        //   }
-        // };
-        //
-        // function gameOver() {
-        //   $(".simonBox").css("background-color", "red");
-        //   $("h2").text("GAME OVER");
-        //   setTimeout(function() {
-        //     $(".simonBox").css("background-color", "#AEFAF7");
-        //     $("h2").text("THE SIMON GAME");
-        //   },1500);
-        //   compSequence = [];
-        // };
+        function red() {
+          userSequence.push(0);
+          moves++;
+          disableAll();
+          blink(0);
+          setTimeout(function() {
+            check();
+            enableAll();
+          },700);
+        }
+
+        function green() {
+          userSequence.push(1);
+          moves++;
+          disableAll();
+          blink(1);
+          setTimeout(function() {
+            check();
+            enableAll();
+          },700);
+        }
+
+        function blue() {
+          userSequence.push(2);
+          moves++;
+          disableAll();
+          blink(2);
+          setTimeout(function() {
+            check();
+            enableAll();
+          },700);
+        }
+
+        function yellow() {
+          userSequence.push(3);
+          moves++;
+          disableAll();
+          blink(3);
+          setTimeout(function() {
+            check();
+            enableAll();
+          },700);
+        }
+
+        function start() {
+          compSequence.push(randomColor());
+          for (var i = 0; i < compSequence.length; i++) {
+            setTimeout(function() {
+              blink (compSequence[i]);
+            },800*i);
+          }
+          setTimeout(function() {
+            enableAll();
+          },700*compSequence.length);
+          document.getElementById("playButton").disabled = true;
+        }
+
+        disableAll();
+        document.addEventListener("playButton").addEventListener("click",start);
+        document.addEventListener("redButton").addEventListener("click",red);
+        document.addEventListener("greenButton").addEventListener("click",green);
+        document.addEventListener("blueButton").addEventListener("click",blue);
+        document.addEventListener("yellowButton").addEventListener("click",yellow);
 
       </script>
 
