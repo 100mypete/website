@@ -49,12 +49,10 @@
 
         <div class="gif">
           <a href="https://genshin.mihoyo.com/en/"><img class="img-responsive" src="https://c.tenor.com/6rKspBamouoAAAAS/genshin-impact.gif"></a>
-          <h3><a href="https://genshin.mihoyo.com/en/">Random Link</a></h3>
         </div>
 
         <div class="gif">
           <a href="https://beta.crunchyroll.com/"><img class="img-responsive" src="https://c.tenor.com/tlP1gAvWPmAAAAAC/kono-suba-anime.gif"></a>
-          <h3><a href="https://beta.crunchyroll.com/">Epic Anime</a></h3>
         </div>
 
       </div>
@@ -68,8 +66,8 @@
       <div class="simonBox">
         <div>
           <div class="simon">
-            <button class="red" id="redButton"></button>
-            <button class="green" id="greenButton"></button>
+            <button class="button red" id="redButton"></button>
+            <button class="button green" id="greenButton" onclick="addTo"></button>
           </div>
         </div>
       </div>
@@ -77,21 +75,124 @@
       <div class="simonBox">
         <div>
           <div class="simon">
-            <button class="blue" id="blueButton"></button>
-            <button class="yellow" id="yellowButton"></button>
+            <button class="button blue" id="blueButton"></button>
+            <button class="button yellow" id="yellowButton"></button>
           </div>
         </div>
       </div>
 
+      <div class="simonBox">
+        <button class="play" id="playButton">Play</button>
+      </div>
+
       <hr>
+
+
+
+
+
+
 
       <script>
 
-        document.getElementById("greenButton").addEventListener("click", function() {
-          console.log('hello there');
-        });
+        var compSequence = [];
+        var userSequence = [];
+
+        $("playButton").click(function() {
+          nextSequence();
+        })
+
+        function nextSequence() {
+          var randomNumber = Math.floor(Math.random()*4);
+          compSequence.push(randomNumber);
+          showSequence(compSequence[compSequence.length - 1]);
+          userSequence = [];
+        }
+
+        function showSequence(thing) {
+
+          switch (thing) {
+            case 0:
+              $("redButton").addClass("glowRed");
+              setTimeout(function() {
+                $("redButton").removeClass("glowRed");
+              },250);
+              break;
+            case 1:
+              $("greenButton").addClass("glowGreen");
+              setTimeout(function() {
+                $("greenButton").removeClass("glowGreen");
+              },250);
+              break;
+            case 2:
+              $("blueButton").addClass("glowBlue");
+              setTimeout(function() {
+                $("blueButton").removeClass("glowBlue");
+              },250);
+              break;
+            case 3:
+              $("yellowButton").addClass("glowYellow");
+              setTimeout(function() {
+                $("yellowButton").removeClass("glowYellow");
+              },250);
+              break;
+          }
+
+        }
+
+        $(".button").click(function() {
+          var clicked = $(this).attr("id");
+          switch(clicked) {
+            case "redButton":
+              userSequence.push(0);
+              showSequence(0);
+              break;
+            case "greenButton":
+              userSequence.push(1);
+              showSequence(1);
+              break;
+            case "blueButton":
+              userSequence.push(2);
+              showSequence(2);
+              break;
+            case "yellowButton":
+              userSequence.push(3);
+              showSequence(3);
+              break;
+          }
+
+          checkSequence(userSequence.length - 1);
+
+        })
+
+        function checkSequence(index) {
+          if (userSequence[index] === compSequence[index] && compSequence.length === userSequence.length) {
+            setTimeout(function() {
+              nextSequence();
+            },1000);
+          }
+          else {
+            gameOver();
+          }
+        }
+
+        function gameOver() {
+          $(".simonBox").css("background-color", "red");
+          $("h2").text("GAME OVER");
+          setTimeout(function() {
+            $(".simonBox").css("background-color", "#AEFAF7");
+            $("h2").text("THE SIMON GAME");
+          },1500);
+          compSequence = [];
+        }
 
       </script>
+
+
+
+
+
+
 
 
       <div>
