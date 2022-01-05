@@ -71,7 +71,7 @@
         <div>
           <div class="simon">
             <button class="button red" id="redButton"></button>
-            <button class="button green" id="greenButton" onclick="addTo"></button>
+            <button class="button green" id="greenButton"></button>
           </div>
         </div>
       </div>
@@ -88,6 +88,14 @@
       <div class="simonBox">
         <button class="play" id="playButton">Play</button>
       </div>
+
+      <h3 id="highScore">
+        HIGH SCORE: <span id="highScoreDisplay"></span>
+      </h3>
+
+      <script>
+        document.getElementById('highScoreDisplay').innerHTML = window.localStorage.highScore;
+      </script>
 
       <hr>
 
@@ -140,6 +148,7 @@
   var round = 1;
   var moves = 1;
   var indexToCheck;
+  var highScore = window.localStorage.getItem("highScore");
 
   function disableAll() {
     document.getElementById("redButton").disabled = true;
@@ -168,6 +177,7 @@
       indexToCheck++;
       checkEnd();
     } else {
+      document.getElementById('highScoreDisplay').innerHTML = window.localStorage.highScore;
       document.getElementById("score").innerHTML = "GAME OVER";
       document.getElementById("playButton").innerHTML = "Restart";
       document.getElementById("playButton").disabled = false;
@@ -333,6 +343,13 @@
   }
 
   function start() {
+    if (window.localStorage.highScore == null) {
+      window.localStorage.highScore = 0;
+    }
+    if (round > window.localStorage.highScore) {
+      window.localStorage.highScore = round;
+    }
+
     compSequence.push(randomColor());
     for (let i = 0; i < compSequence.length; i++) {
       setTimeout(function() {
