@@ -150,6 +150,14 @@
     indexToCheck : 0,
     highScore : window.localStorage.getItem("highScore"),
 
+    reload : function () {
+      this.compSequence = [];
+      this.userSequence = [];
+      this.round = 1;
+      this.moves = 1;
+      location.reload();
+    }
+
 
     disableAll : function () {
       document.getElementById("redButton").disabled = true;
@@ -157,25 +165,18 @@
       document.getElementById("blueButton").disabled = true;
       document.getElementById("yellowButton").disabled = true;
     }
+
+    enableAll() : function () {
+      document.getElementById("redButton").disabled = false;
+      document.getElementById("greenButton").disabled = false;
+      document.getElementById("blueButton").disabled = false;
+      document.getElementById("yellowButton").disabled = false;
+    }
   }
 
 
 
 
-  function enableAll() {
-    document.getElementById("redButton").disabled = false;
-    document.getElementById("greenButton").disabled = false;
-    document.getElementById("blueButton").disabled = false;
-    document.getElementById("yellowButton").disabled = false;
-  }
-
-  function reload() {
-    simonGame.compSequence = [];
-    var userSequence = [];
-    var round = 1;
-    var moves = 1;
-    location.reload();
-  }
 
   function check() {
     if (userSequence.at(-1) == compSequence.at(indexToCheck)) {
