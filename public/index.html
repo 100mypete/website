@@ -142,20 +142,25 @@
 
 
 <script>
+  let simonGame = {
+    compSequence : [],
+    userSequence : [],
+    round : 1,
+    moves : 1,
+    indexToCheck : 0,
+    highScore : window.localStorage.getItem("highScore"),
 
-  var compSequence = [];
-  var userSequence = [];
-  var round = 1;
-  var moves = 1;
-  var indexToCheck;
-  var highScore = window.localStorage.getItem("highScore");
 
-  function disableAll() {
-    document.getElementById("redButton").disabled = true;
-    document.getElementById("greenButton").disabled = true;
-    document.getElementById("blueButton").disabled = true;
-    document.getElementById("yellowButton").disabled = true;
+    disableAll : function () {
+      document.getElementById("redButton").disabled = true;
+      document.getElementById("greenButton").disabled = true;
+      document.getElementById("blueButton").disabled = true;
+      document.getElementById("yellowButton").disabled = true;
+    }
   }
+
+
+
 
   function enableAll() {
     document.getElementById("redButton").disabled = false;
@@ -165,7 +170,7 @@
   }
 
   function reload() {
-    compSequence = [];
+    simonGame.compSequence = [];
     var userSequence = [];
     var round = 1;
     var moves = 1;
